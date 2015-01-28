@@ -1,0 +1,12 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="col-lg-6">
+    <input type="text" class="form-control" placeholder="Search by auto number ..." data-ng-model="autoNumber"
+           data-ng-keyup="getFeedback()">
+    <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
+        <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''" data-ng-repeat="item in autoNumbers">
+            <span class="glyphicon glyphicon-star" data-ng-repeat="i in range(item.rating)"></span>
+            {{item.number}}
+        </li>
+    </ul>
+</div><!-- /.col-lg-6 -->
+<div ng-include="'components/footer/footer.html'"></div>
