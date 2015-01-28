@@ -1,75 +1,72 @@
 'use strict';
 
 var _ = require('lodash');
-var Destination = require('./destination.model');
+var Feedback = require('./feedback.model');
 
-// Get list of destinations
+// Get list of feedbacks
 exports.index = function (req, res) {
-    Destination.find(function (err, destinations) {
+    Feedback.find(function (err, feedbacks) {
         if (err) {
             return handleError(res, err);
         }
-        return res.json(200, destinations);
+        return res.json(200, feedbacks);
     });
 };
 
-// Get a single destination
+// Get a single feedback
 exports.show = function (req, res) {
-    console.log(">>>>>>>>>>>> Checking the req : ");
-    console.log(req);
-    Destination.findById(req.params.id, function (err, destination) {
+    Feedback.findById(req.params.id, function (err, feedback) {
         if (err) {
             return handleError(res, err);
         }
-        if (!destination) {
+        if (!feedback) {
             return res.send(404);
         }
-        return res.json(destination);
+        return res.json(feedback);
     });
 };
 
-// Creates a new destination in the DB.
+// Creates a new feedback in the DB.
 exports.create = function (req, res) {
-    Destination.create(req.body, function (err, destination) {
-        if (err) {
-            return handleError(res, err);
-        }
-        return res.json(201, destination);
-    });
+    console.log(req.body);
+    Feedback.create(req.body.data, function(err, feedback) {
+     if(err) { return handleError(res, err); }
+     return res.json(201, feedback);
+     });
 };
 
-// Updates an existing destination in the DB.
+// Updates an existing feedback in the DB.
 exports.update = function (req, res) {
     if (req.body._id) {
         delete req.body._id;
     }
-    Destination.findById(req.params.id, function (err, destination) {
+    Feedback.findById(req.params.id, function (err, feedback) {
         if (err) {
             return handleError(res, err);
         }
-        if (!destination) {
+        if (!feedback) {
             return res.send(404);
         }
-        var updated = _.merge(destination, req.body);
+        var updated = _.merge(feedback, req.body);
         updated.save(function (err) {
             if (err) {
                 return handleError(res, err);
             }
-            return res.json(200, destination);
+            return res.json(200, feedback);
         });
     });
 };
 
-// Deletes a destination from the DB.
+// Deletes a feedback from the DB.
 exports.destroy = function (req, res) {
-    Destination.findById(req.params.id, function (err, destination) {
+    Feedback.findById(req.params.id, function (err, feedback) {
         if (err) {
             return handleError(res, err);
         }
-        if (!destination) {
+        if (!feedback) {
             return res.send(404);
         }
-        destination.remove(function (err) {
+        feedback.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }
