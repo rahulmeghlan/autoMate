@@ -16,7 +16,7 @@ angular.module('angularFullstackApp')
 
         $scope.getFeedback = function () {
             $scope.isListAvailable = $scope.autoNumber.trim().length > 2;
-            if (!tempResult)this.serverReq_post("/api/feedback", $scope.autoNumber.trim());
+            if (!tempResult)this.serverReq_get("/api/feedback/" + $scope.autoNumber.trim());
         };
 
         $scope.serverReq_get = function (api) {
@@ -25,11 +25,13 @@ angular.module('angularFullstackApp')
                 .success(function (response) {
                     $scope.result.data = response;
                     $scope.result.type = "success";
+                    $scope.autoNumbers = response;
                     tempResult = false;
                 })
                 .error(function (response) {
                     $scope.result.data = response;
                     $scope.result.type = "error";
+                    tempResult = false;
                 });
         };
 

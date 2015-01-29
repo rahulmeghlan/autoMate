@@ -5,10 +5,10 @@
     <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
         <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''" data-ng-repeat="item in autoNumbers">
             <span class="glyphicon glyphicon-star" data-ng-repeat="i in range(item.rating)"></span>
-            {{item.number}}
+            {{item.auto_number}}
         </li>
     </ul>
 </div><!-- /.col-lg-6 -->
 
-<input type="button" class="col-md-3 form-control" value="Create Database" data-ng-click="createDatabase()" >
+<!--<input type="button" class="col-md-3 form-control" value="Create Database" data-ng-click="createDatabase()" >-->
 <div ng-include="'components/footer/footer.html'"></div>

@@ -15,7 +15,12 @@ exports.index = function (req, res) {
 
 // Get a single feedback
 exports.show = function (req, res) {
-    Feedback.findById(req.params.id, function (err, feedback) {
+    console.log(">>>> Checking the request : ");
+    console.log(req.params);
+//    Feedback.findById(req.params.id, function (err, feedback) {
+    Feedback.find({"auto_number": {$regex: req.params.q, $options: "i"}}, function (err, feedback) {
+        console.log("Checking the feedback: ");
+        console.log(feedback);
         if (err) {
             return handleError(res, err);
         }
@@ -28,11 +33,12 @@ exports.show = function (req, res) {
 
 // Creates a new feedback in the DB.
 exports.create = function (req, res) {
-    console.log(req.body);
-    Feedback.create(req.body.data, function(err, feedback) {
-     if(err) { return handleError(res, err); }
-     return res.json(201, feedback);
-     });
+    Feedback.create(req.body.data, function (err, feedback) {
+        if (err) {
+            return handleError(res, err);
+        }
+        return res.json(201, feedback);
+    });
 };
 
 // Updates an existing feedback in the DB.
