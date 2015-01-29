@@ -7,7 +7,8 @@
             <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
                 <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''"
                     data-ng-repeat="item in autoNumbers">
-                    <span class="glyphicon glyphicon-star active rating" data-ng-repeat="i in range(item.rating)"></span>
+                    <span class="glyphicon glyphicon-star active rating"
+                          data-ng-repeat="i in range(item.rating)"></span>
                     {{item.auto_number}}
                 </li>
             </ul>
@@ -27,11 +28,14 @@
                 </div>
                 <div class="form-group">
                     <label for="driverName">Feedback</label>
-                    <input type="text" class="form-control" id="feedback" placeholder="Driver's Feedback"
-                           data-ng-model="driver_feedback_msg">
-                    <label>Rating</label>
-                    <br />
-                    <span class="glyphicon glyphicon-star rating rating_{{i}}" data-ng-model="rating_[i]" data-ng-class="rating_[i]" data-ng-repeat="i in range(5)" data-ng-click="setRating($event)"></span>
+                    <textarea type="text" class="form-control" id="feedback" placeholder="Driver's Feedback"
+                              data-ng-model="driver_feedback_msg"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Rating </label> <br/>
+                    <span class="glyphicon glyphicon-star rating rating_{{i}}" data-ng-model="rating_[i]"
+                          data-ng-class="rating_[i]" data-ng-repeat="i in range(5)"
+                          data-ng-click="setRating($event)"></span>
                 </div>
                 <div class="form-group">
                     <label for="photoUpload">Driver's Photo</label>
