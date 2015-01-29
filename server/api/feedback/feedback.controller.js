@@ -15,12 +15,7 @@ exports.index = function (req, res) {
 
 // Get a single feedback
 exports.show = function (req, res) {
-    console.log(">>>> Checking the request : ");
-    console.log(req.params);
-//    Feedback.findById(req.params.id, function (err, feedback) {
     Feedback.find({"auto_number": {$regex: req.params.q, $options: "i"}}, function (err, feedback) {
-        console.log("Checking the feedback: ");
-        console.log(feedback);
         if (err) {
             return handleError(res, err);
         }
