@@ -1,14 +1,47 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-lg-6">
-    <input type="text" class="form-control" placeholder="Search by auto number ..." data-ng-model="autoNumber"
-           data-ng-keyup="getFeedback()">
-    <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
-        <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''" data-ng-repeat="item in autoNumbers">
-            <span class="glyphicon glyphicon-star" data-ng-repeat="i in range(item.rating)"></span>
-            {{item.auto_number}}
-        </li>
-    </ul>
-</div><!-- /.col-lg-6 -->
-
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <input type="text" class="form-control" placeholder="Search by auto number ..." data-ng-model="autoNumber"
+                   data-ng-keyup="getFeedback()">
+            <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
+                <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''"
+                    data-ng-repeat="item in autoNumbers">
+                    <span class="glyphicon glyphicon-star active rating" data-ng-repeat="i in range(item.rating)"></span>
+                    {{item.auto_number}}
+                </li>
+            </ul>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="col-lg-6">
+            <form>
+                <div class="form-group">
+                    <label for="autoNumber">Auto Number</label>
+                    <input type="text" class="form-control" id="autoNumber" placeholder="Auto's Number"
+                           data-ng-model="auto_number" required="true">
+                </div>
+                <div class="form-group">
+                    <label for="driverName">Driver Name</label>
+                    <input type="text" class="form-control" id="driverName" placeholder="Driver's Name"
+                           data-ng-model="driver_name">
+                </div>
+                <div class="form-group">
+                    <label for="driverName">Feedback</label>
+                    <input type="text" class="form-control" id="feedback" placeholder="Driver's Feedback"
+                           data-ng-model="driver_feedback_msg">
+                    <label>Rating</label>
+                    <br />
+                    <span class="glyphicon glyphicon-star rating rating_{{i}}" data-ng-model="rating_[i]" data-ng-class="rating_[i]" data-ng-repeat="i in range(5)" data-ng-click="setRating($event)"></span>
+                </div>
+                <div class="form-group">
+                    <label for="photoUpload">Driver's Photo</label>
+                    <input type="file" class="form-control" id="photoUpload" data-ng-model="driver_photo">
+                </div>
+                <button type="submit" class="btn btn-default" data-ng-click="submitForm()">Submit</button>
+            </form>
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+</div>
 <!--<input type="button" class="col-md-3 form-control" value="Create Database" data-ng-click="createDatabase()" >-->
 <div ng-include="'components/footer/footer.html'"></div>

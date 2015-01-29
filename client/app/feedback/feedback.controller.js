@@ -19,6 +19,23 @@ angular.module('angularFullstackApp')
             if (!tempResult)this.serverReq_get("/api/feedback/" + $scope.autoNumber.trim());
         };
 
+        $scope.submitForm = function () {
+        };
+
+        $scope.setRating = function (event) {
+            var count = parseInt(event.target.className.match(/rating_\d/)[0].match(/\d/)[0]);
+            $("form span.rating").removeClass("active");
+            for (var i = 0; i <= count; i++) {
+//                $scope.rating_[i] = "active";  todo : need to find a better to way to solve this problem
+                $("span.rating_" + i).addClass("active");
+            }
+        };
+
+        $scope.monitorChanges = function (model) {
+            $scope.$watch(model, function (newValue, oldValue) {
+            })
+        };
+
         $scope.serverReq_get = function (api) {
             tempResult = true;
             $http.get(api)
