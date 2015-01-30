@@ -76,6 +76,10 @@ exports.destroy = function (req, res) {
     });
 };
 
-function handleError(res, err) {
+var handleError = function (res, err) {
     return res.send(500, err);
-}
+};
+
+var calculateRating = function (feedback) {
+
+};
