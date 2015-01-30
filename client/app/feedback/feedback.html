@@ -35,7 +35,7 @@
                     <label>Rating </label> <br/>
                     <span class="glyphicon glyphicon-star rating rating_{{i}}" data-ng-model="rating_[i]"
                           data-ng-class="rating_[i]" data-ng-repeat="i in range(5)"
-                          data-ng-click="setRating($event)"></span>
+                          data-ng-click="setRating($event)" data-ng-mouseover="setRating($event)"></span>
                 </div>
                 <div class="form-group">
                     <label for="photoUpload">Driver's Photo</label>
