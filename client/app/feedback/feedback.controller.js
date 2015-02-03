@@ -96,7 +96,7 @@ angular.module('angularFullstackApp')
          * */
         $scope.updateForm = function () {
             $scope.auto_number = $scope.autoNumber;
-            $("#autoNumber").focus();
+            $(".search_auto").blur();
         };
 
 
