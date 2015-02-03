@@ -1,22 +1,26 @@
 'use strict';
 
 angular.module('angularFullstackApp')
-    .controller('FeedbackCtrl', function ($scope, $http) {
-
-        var tempResult = false,
-            count = 0;
-        $scope.isListAvailable = false;
-        $scope.result = {};
-        $scope['autoNumbers'] = [
-            {auto_number: 'HR26AH1286', rating: 4, driver_name: "rahul"},
-            {auto_number: 'HR26AM8499', rating: 3, driver_name: "yogendra"},
-            {auto_number: 'HR26BW6602', rating: 1, driver_name: "rahul"},
-            {auto_number: 'HR26CH1599', rating: 4, driver_name: "rahul"}
-        ];
+    .controller('FeedbackCtrl', function ($rootScope, $scope, $http) {
+        var count = 0;
+        $scope.isListAvailable = false; // boolean to show/hide the list of auto-numbers
+        $scope.isNewEntry = false; // boolean to show/hide the new-feedback form
 
         $scope.getFeedback = function () {
+            var _this = this;
             $scope.isListAvailable = $scope.autoNumber.trim().length > 2;
-            if (!tempResult)this.serverReq_get("/api/feedback/" + $scope.autoNumber.trim());
+            this.serverReq_get("/api/feedback/" + $scope.autoNumber.trim(), {
+                success: function (response) {
+                    $scope.autoNumbers = response;
+                    $scope.isNewEntry = !(response.length);
+                    if ($scope.isNewEntry) {
+                        $rootScope.showAlert = true;
+                        $scope.updateForm();
+                    }
+                },
+                error: function (response) {
+                }
+            });
         };
 
         $scope.submitForm = function () {
@@ -28,8 +32,17 @@ angular.module('angularFullstackApp')
                 ],
                 driver_photo: $scope.driver_photo
             };
+            /*
+             * Send the data calculated from above to the BE API
+             * */
+            $scope.serverReq_post("/api/feedback", data, {
+                success: function (response) {
+                    $scope.autoNumbers = response;
+                },
+                error: function (response) {
 
-            $scope.serverReq_post("/api/feedback", data)
+                }
+            })
         };
 
         $scope.setRating = function (event) {
@@ -49,32 +62,22 @@ angular.module('angularFullstackApp')
             })
         };
 
-        $scope.serverReq_get = function (api) {
-            tempResult = true;
+        $scope.serverReq_get = function (api, callBacks) {
             $http.get(api)
                 .success(function (response) {
-                    $scope.result.data = response;
-                    $scope.result.type = "success";
-                    $scope.autoNumbers = response;
-                    tempResult = false;
+                    callBacks.success(response);
                 })
                 .error(function (response) {
-                    $scope.result.data = response;
-                    $scope.result.type = "error";
-                    tempResult = false;
+                    callBacks.error(response);
                 });
         };
 
-        $scope.serverReq_post = function (api, params) {
-            tempResult = true;
+        $scope.serverReq_post = function (api, params, callBacks) {
             $http.post(api, {data: params})
                 .success(function (response) {
-                    console.log(response);
-                    tempResult = false;
+                    callBacks.success(response)
                 })
                 .error(function (response) {
-                    $scope.result.data = response;
-                    $scope.result.type = "error";
                 });
         };
 
@@ -82,6 +85,19 @@ angular.module('angularFullstackApp')
             for (var i = 0; i < $scope.autoNumbers.length; i++) {
                 this.serverReq_post("/api/feedback", $scope.autoNumbers[i]);
             }
-        }
+        };
+
+        /*
+         * Private Methods
+         * */
+
+        /*
+         * Private method to update the form with the inputs.
+         * */
+        $scope.updateForm = function () {
+            $scope.auto_number = $scope.autoNumber;
+            $("#autoNumber").focus();
+        };
+
 
     });

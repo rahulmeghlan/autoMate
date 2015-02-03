@@ -14,12 +14,12 @@
             </ul>
         </div>
         <!-- /.col-lg-6 -->
-        <div class="col-lg-6">
+        <div class="col-lg-6 new-entry-form" data-ng-show="isNewEntry">
             <form>
                 <div class="form-group">
                     <label for="autoNumber">Auto Number</label>
                     <input type="text" class="form-control" id="autoNumber" placeholder="Auto's Number"
-                           data-ng-model="auto_number" required="true">
+                           data-ng-model="auto_number" required="true" data-ng-focus="isNewEntry">
                 </div>
                 <div class="form-group">
                     <label for="driverName">Driver Name</label>
@@ -48,4 +48,5 @@
     </div>
 </div>
 <!--<input type="button" class="col-md-3 form-control" value="Create Database" data-ng-click="createDatabase()" >-->
+<div data-ng-include="'components/utils/alert.html'"></div>
 <div ng-include="'components/footer/footer.html'"></div>
