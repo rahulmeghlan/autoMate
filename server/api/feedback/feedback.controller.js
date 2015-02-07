@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Feedback = require('./feedback.model');
+var fs = require('fs');
 
 // Get list of feedbacks
 exports.index = function (req, res) {
@@ -28,6 +29,12 @@ exports.show = function (req, res) {
 
 // Creates a new feedback in the DB.
 exports.create = function (req, res) {
+    //todo : the commented code is useful in the case of multi-part file upload.
+    /*fs.writeFile('image1.png', req.files.driver_photo.buffer, function (err) {
+     if (err) {
+     console.log("error in writing file")
+     }
+     });*/
     Feedback.create(req.body.data, function (err, feedback) {
         if (err) {
             return handleError(res, err);

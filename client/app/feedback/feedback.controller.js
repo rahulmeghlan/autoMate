@@ -4,7 +4,7 @@ angular.module('angularFullstackApp')
     .controller('FeedbackCtrl', function ($rootScope, $scope, $http) {
         var count = 0;
         $scope.isListAvailable = false; // boolean to show/hide the list of auto-numbers
-        $scope.isNewEntry = false; // boolean to show/hide the new-feedback form
+        $scope.isNewEntry = true; // boolean to show/hide the new-feedback form
 
         $scope.getFeedback = function () {
             var _this = this;
@@ -24,25 +24,37 @@ angular.module('angularFullstackApp')
         };
 
         $scope.submitForm = function () {
-            var data = {auto_number: $scope.auto_number,
-                driver_name: $scope.driver_name,
-                rating: ++count,
-                feedback: [
-                    {message: $scope.driver_feedback_msg, rating: ++count}
-                ],
-                driver_photo: $scope.driver_photo
+            var reader = new FileReader(),
+                data = {};
+            reader.onload = function (e) {
+                alert("Inside onload");
+                data = {auto_number: $scope.auto_number,
+                    driver_name: $scope.driver_name,
+                    rating: ++count,
+                    feedback: [
+                        {message: $scope.driver_feedback_msg, rating: ++count}
+                    ],
+                    driver_photo: reader.result
+                };
+                // todo : implement promise here
+                $scope.serverReq_post("/api/feedback", data, {
+                    success: function (response) {
+                        console.log("Inside the success state: ");
+                        var img = new Image();
+                        img.src = response.driver_photo;
+                        $("body").append(img);
+                    },
+                    error: function (response) {
+
+                    }
+                });
             };
+            alert("before readasdataurl");
+            reader.readAsDataURL($scope.driver_photo);
             /*
              * Send the data calculated from above to the BE API
              * */
-            $scope.serverReq_post("/api/feedback", data, {
-                success: function (response) {
-                    $scope.autoNumbers = response;
-                },
-                error: function (response) {
 
-                }
-            })
         };
 
         $scope.setRating = function (event) {
@@ -73,7 +85,9 @@ angular.module('angularFullstackApp')
         };
 
         $scope.serverReq_post = function (api, params, callBacks) {
-            $http.post(api, {data: params})
+            $http.post(api, {data: params}, {
+                transFormRequest: angular.identity
+            })
                 .success(function (response) {
                     callBacks.success(response)
                 })

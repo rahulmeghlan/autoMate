@@ -2,7 +2,8 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <input type="text" class="form-control search_auto" placeholder="Search by auto number ..." data-ng-model="autoNumber"
+            <input type="text" class="form-control search_auto" placeholder="Search by auto number ..."
+                   data-ng-model="autoNumber"
                    data-ng-keyup="getFeedback()">
             <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
                 <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''"
@@ -15,7 +16,8 @@
         </div>
         <!-- /.col-lg-6 -->
         <div class="col-lg-6 new-entry-form" data-ng-show="isNewEntry">
-            <form>
+            <form enctype='multipart/form-data'>
+            <!--<form action="/api/feedback" method="post" enctype='multipart/form-data'>-->
                 <div class="form-group">
                     <label for="autoNumber">Auto Number</label>
                     <input type="text" class="form-control" id="autoNumber" placeholder="Auto's Number"
@@ -23,12 +25,12 @@
                 </div>
                 <div class="form-group">
                     <label for="driverName">Driver Name</label>
-                    <input type="text" class="form-control" id="driverName" placeholder="Driver's Name"
+                    <input type="text" class="form-control" id="driverName" name="driver_name" placeholder="Driver's Name"
                            data-ng-model="driver_name">
                 </div>
                 <div class="form-group">
                     <label for="driverName">Feedback</label>
-                    <textarea type="text" class="form-control" id="feedback" placeholder="Driver's Feedback"
+                    <textarea type="text" class="form-control" id="feedback" name="driver_feedback_msg" placeholder="Driver's Feedback"
                               data-ng-model="driver_feedback_msg"></textarea>
                 </div>
                 <div class="form-group">
@@ -39,9 +41,10 @@
                 </div>
                 <div class="form-group">
                     <label for="photoUpload">Driver's Photo</label>
-                    <input type="file" class="form-control" id="photoUpload" data-ng-model="driver_photo">
+                    <input type="file" class="form-control" id="photoUpload" name="driver_photo" file-model="driver_photo">
                 </div>
                 <button type="submit" class="btn btn-default" data-ng-click="submitForm()">Submit</button>
+                <!--<button type="submit" class="btn btn-default">Submit</button>-->
             </form>
         </div>
         <!-- /.col-lg-6 -->
