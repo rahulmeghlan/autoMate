@@ -27,7 +27,6 @@ angular.module('angularFullstackApp')
             var reader = new FileReader(),
                 data = {};
             reader.onload = function (e) {
-                alert("Inside onload");
                 data = {auto_number: $scope.auto_number,
                     driver_name: $scope.driver_name,
                     rating: ++count,
@@ -39,7 +38,6 @@ angular.module('angularFullstackApp')
                 // todo : implement promise here
                 $scope.serverReq_post("/api/feedback", data, {
                     success: function (response) {
-                        console.log("Inside the success state: ");
                         var img = new Image();
                         img.src = response.driver_photo;
                         $("body").append(img);
@@ -49,7 +47,6 @@ angular.module('angularFullstackApp')
                     }
                 });
             };
-            alert("before readasdataurl");
             reader.readAsDataURL($scope.driver_photo);
             /*
              * Send the data calculated from above to the BE API
