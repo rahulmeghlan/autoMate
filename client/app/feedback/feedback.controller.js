@@ -4,23 +4,24 @@ angular.module('angularFullstackApp')
     .controller('FeedbackCtrl', function ($rootScope, $scope, $http) {
         var count = 0;
         $scope.isListAvailable = false; // boolean to show/hide the list of auto-numbers
-        $scope.isNewEntry = true; // boolean to show/hide the new-feedback form
+        $scope.isNewEntry = false; // boolean to show/hide the new-feedback form
 
         $scope.getFeedback = function () {
-            var _this = this;
             $scope.isListAvailable = $scope.autoNumber.trim().length > 2;
-            this.serverReq_get("/api/feedback/" + $scope.autoNumber.trim(), {
-                success: function (response) {
-                    $scope.autoNumbers = response;
-                    $scope.isNewEntry = !(response.length);
-                    if ($scope.isNewEntry) {
-                        $rootScope.showAlert = true;
-                        $scope.updateForm();
+            if ($scope.isListAvailable) {
+                this.serverReq_get("/api/feedback/" + $scope.autoNumber.trim(), {
+                    success: function (response) {
+                        $scope.autoNumbers = response;
+                        $scope.isNewEntry = !(response.length);
+                        if ($scope.isNewEntry) {
+                            $rootScope.showAlert = true;
+                            $scope.updateForm();
+                        }
+                    },
+                    error: function (response) {
                     }
-                },
-                error: function (response) {
-                }
-            });
+                });
+            }
         };
 
         $scope.submitForm = function () {
@@ -108,6 +109,9 @@ angular.module('angularFullstackApp')
         $scope.updateForm = function () {
             $scope.auto_number = $scope.autoNumber;
             $(".search_auto").blur();
+        };
+
+        var validateRegEx = function (text) {
         };
 
 

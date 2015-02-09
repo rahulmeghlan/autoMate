@@ -13,7 +13,6 @@ angular.module('angularFullstackApp')
                         modelSetter(scope, element[0].files[0]);
                     });
                 });
-                element.text('this is the fileModel directive');
             }
         };
     }]);

@@ -17,20 +17,22 @@
         <!-- /.col-lg-6 -->
         <div class="col-lg-6 new-entry-form" data-ng-show="isNewEntry">
             <form enctype='multipart/form-data'>
-            <!--<form action="/api/feedback" method="post" enctype='multipart/form-data'>-->
+                <!--<form action="/api/feedback" method="post" enctype='multipart/form-data'>-->
                 <div class="form-group">
                     <label for="autoNumber">Auto Number</label>
                     <input type="text" class="form-control" id="autoNumber" placeholder="Auto's Number"
-                           data-ng-model="auto_number" required="true" data-ng-focus="isNewEntry">
+                           data-ng-model="auto_number" data-ng-focus="isNewEntry" data-reg-ex="reg_auto_number">
                 </div>
                 <div class="form-group">
                     <label for="driverName">Driver Name</label>
-                    <input type="text" class="form-control" id="driverName" name="driver_name" placeholder="Driver's Name"
+                    <input type="text" class="form-control" id="driverName" name="driver_name"
+                           placeholder="Driver's Name"
                            data-ng-model="driver_name">
                 </div>
                 <div class="form-group">
                     <label for="driverName">Feedback</label>
-                    <textarea type="text" class="form-control" id="feedback" name="driver_feedback_msg" placeholder="Driver's Feedback"
+                    <textarea type="text" class="form-control" id="feedback" name="driver_feedback_msg"
+                              placeholder="Driver's Feedback"
                               data-ng-model="driver_feedback_msg"></textarea>
                 </div>
                 <div class="form-group">
@@ -41,7 +43,8 @@
                 </div>
                 <div class="form-group">
                     <label for="photoUpload">Driver's Photo</label>
-                    <input type="file" class="form-control" id="photoUpload" name="driver_photo" file-model="driver_photo">
+                    <input type="file" class="form-control" id="photoUpload" name="driver_photo"
+                           file-model="driver_photo">
                 </div>
                 <button type="submit" class="btn btn-default" data-ng-click="submitForm()">Submit</button>
                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
