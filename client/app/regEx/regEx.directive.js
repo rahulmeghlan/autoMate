@@ -12,13 +12,18 @@ angular.module('angularFullstackApp')
                     case "reg_auto_number":
                         regEx = /^([a-z]{2}\d{2}[a-z]{1,2}\d{4})$/;
                         break;
-
                 }
 
                 element.bind('keyup focus', function () {
-                    if (!element.hasClass("error"))element.addClass("error");
-                    if (regEx.test(element.val()))
+                    //todo : refactor the below statements further
+                    if (!element.hasClass("error")) {
+                        element.addClass("error");
+                        $rootScope.isValidationError = true;
+                    }
+                    if (regEx.test(element.val())) {
                         element.removeClass("error");
+                        $rootScope.isValidationError = false;
+                    }
                 });
             }
         };
