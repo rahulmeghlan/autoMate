@@ -1,9 +1,18 @@
+@bg-color: #e7e7e7;
+
 .list-group-item {
+
   &.label-danger {
     background-color: @brand-danger;
   }
   .rating {
     float: right;
+  }
+  &:hover {
+    background-color: @bg-color;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
   }
 }
 

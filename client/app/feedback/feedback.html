@@ -8,9 +8,11 @@
             <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
                 <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''"
                     data-ng-repeat="item in autoNumbers">
-                    <span class="glyphicon glyphicon-star active rating"
-                          data-ng-repeat="i in range(item.rating)"></span>
-                    {{item.auto_number}}
+                    <a data-ng-href="/feedback/{{item.auto_number}}">
+                        <span class="glyphicon glyphicon-star active rating"
+                              data-ng-repeat="i in range(item.rating)"></span>
+                        {{item.auto_number}}
+                    </a>
                 </li>
             </ul>
         </div>
