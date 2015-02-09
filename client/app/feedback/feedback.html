@@ -6,14 +6,13 @@
                    data-ng-model="autoNumber"
                    data-ng-keyup="getFeedback()">
             <ul class="list-group auto-numbers-list" data-ng-show="isListAvailable">
-                <li class="list-group-item" data-ng-class="item.rating < 3 ? label-red:''"
-                    data-ng-repeat="item in autoNumbers">
-                    <a data-ng-href="/feedback/{{item.auto_number}}">
+                <a data-ng-href="/feedback/{{item.auto_number}}" data-ng-repeat="item in autoNumbers">
+                    <li class="list-group-item">
                         <span class="glyphicon glyphicon-star active rating"
                               data-ng-repeat="i in range(item.rating)"></span>
                         {{item.auto_number}}
-                    </a>
-                </li>
+                    </li>
+                </a>
             </ul>
         </div>
         <!-- /.col-lg-6 -->
@@ -48,7 +47,7 @@
                     <input type="file" class="form-control" id="photoUpload" name="driver_photo"
                            file-model="driver_photo">
                 </div>
-                <button type="submit" class="btn btn-default" data-ng-click="submitForm()">Submit</button>
+                <button type="submit" class="btn btn-default" data-ng-disabled="isSubmitted" data-ng-click="submitForm()">Submit</button>
                 <!--<button type="submit" class="btn btn-default">Submit</button>-->
             </form>
         </div>

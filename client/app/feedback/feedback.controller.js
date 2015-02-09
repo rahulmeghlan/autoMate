@@ -5,6 +5,7 @@ angular.module('angularFullstackApp')
         var count = 0;
         $scope.isListAvailable = false; // boolean to show/hide the list of auto-numbers
         $scope.isNewEntry = false; // boolean to show/hide the new-feedback form
+        $scope.isSubmitted = false; //boolean to disable/enable submit button
 
         $scope.getFeedback = function () {
             $scope.isListAvailable = $scope.autoNumber.trim().length > 2;
@@ -25,6 +26,11 @@ angular.module('angularFullstackApp')
         };
 
         $scope.submitForm = function () {
+            if ($rootScope.isValidationError) {
+
+                return false;
+            }
+            $scope.isSubmitted = true;
             var reader = new FileReader(),
                 data = {};
             reader.onload = function (e) {
@@ -42,6 +48,7 @@ angular.module('angularFullstackApp')
                         var img = new Image();
                         img.src = response.driver_photo;
                         $("body").append(img);
+                        $scope.isNewEntry = false;
                     },
                     error: function (response) {
 
@@ -98,11 +105,6 @@ angular.module('angularFullstackApp')
                 this.serverReq_post("/api/feedback", $scope.autoNumbers[i]);
             }
         };
-
-        /*
-         * Private Methods
-         * */
-
         /*
          * Private method to update the form with the inputs.
          * */
@@ -110,9 +112,5 @@ angular.module('angularFullstackApp')
             $scope.auto_number = $scope.autoNumber;
             $(".search_auto").blur();
         };
-
-        var validateRegEx = function (text) {
-        };
-
 
     });
