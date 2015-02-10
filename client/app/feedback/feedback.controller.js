@@ -38,7 +38,7 @@ angular.module('angularFullstackApp')
                     driver_name: $scope.driver_name,
                     rating: ++count,
                     feedback: [
-                        {message: $scope.driver_feedback_msg, rating: ++count}
+                        {message: $scope.driver_feedback_msg, rating: count}
                     ],
                     driver_photo: reader.result
                 };

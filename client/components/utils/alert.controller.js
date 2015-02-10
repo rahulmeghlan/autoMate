@@ -7,6 +7,6 @@ angular.module('angularFullstackApp')
          * */
         $scope.hideAlert = function () {
             $rootScope.showAlert = false;
-            $("#autoNumber").focus();
+            $("#autoNumber").focus(); // todo : this should be refactored and made more generic
         }
     });
