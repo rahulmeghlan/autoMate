@@ -8,7 +8,7 @@ angular.module('angularFullstackApp')
                 controller: 'FeedbackCtrl'
             })
             .when('/feedback/:id', {
-                templateUrl: 'app/feedback/feedback_id.html',
-                controller: 'FeedbackCtrl'
+                templateUrl: 'app/feedback_item/feedback_item.html',
+                controller: 'FeedbackItemCtrl'
             });
     });

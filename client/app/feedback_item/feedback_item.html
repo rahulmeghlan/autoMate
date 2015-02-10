@@ -1,0 +1,37 @@
+<div data-ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3 col-md-3">
+            <img class="driver-photo" data-ng-src="{{driver_photo}}" alt="driverPhoto">
+        </div>
+        <div class="col-xs-6 col-xs-offset-1 col-md-6">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Auto Number</th>
+                    <td class="auto-number">{{auto_number}}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{driver_name}}</td>
+                </tr>
+                <tr>
+                    <th>Avg Rating</th>
+                    <td><span class="glyphicon glyphicon-star active rating"
+                              data-ng-repeat="i in range(rating)"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row col-md-offset-3">
+        <table class="table table-striped">
+            <tr data-ng-repeat="item in feedback">
+                <td class="col-md-9">{{item.message}}</td>
+                <td class="col-md-3"><span class="glyphicon glyphicon-star active rating"
+                                           data-ng-repeat="i in range(item.rating)"></span></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div data-ng-include="'components/utils/alert.html'"></div>
+<div data-ng-include="'components/footer/footer.html'"></div>

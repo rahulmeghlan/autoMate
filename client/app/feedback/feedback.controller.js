@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularFullstackApp')
-    .controller('FeedbackCtrl', function ($rootScope, $scope, $http) {
+    .controller('FeedbackCtrl', function ($rootScope, $scope, backEnd) {
         var count = 0;
         $scope.isListAvailable = false; // boolean to show/hide the list of auto-numbers
         $scope.isNewEntry = false; // boolean to show/hide the new-feedback form
@@ -10,7 +10,7 @@ angular.module('angularFullstackApp')
         $scope.getFeedback = function () {
             $scope.isListAvailable = $scope.autoNumber.trim().length > 2;
             if ($scope.isListAvailable) {
-                this.serverReq_get("/api/feedback/" + $scope.autoNumber.trim(), {
+                backEnd.serverReq_get("/api/feedback/" + $scope.autoNumber.trim() + '?resultType=short', {
                     success: function (response) {
                         $scope.autoNumbers = response;
                         $scope.isNewEntry = !(response.length);
@@ -43,7 +43,7 @@ angular.module('angularFullstackApp')
                     driver_photo: reader.result
                 };
                 // todo : implement promise here
-                $scope.serverReq_post("/api/feedback", data, {
+                backEnd.serverReq_post("/api/feedback", data, {
                     success: function (response) {
                         var img = new Image();
                         img.src = response.driver_photo;
@@ -77,27 +77,6 @@ angular.module('angularFullstackApp')
         $scope.monitorChanges = function (model) {
             $scope.$watch(model, function (newValue, oldValue) {
             })
-        };
-
-        $scope.serverReq_get = function (api, callBacks) {
-            $http.get(api)
-                .success(function (response) {
-                    callBacks.success(response);
-                })
-                .error(function (response) {
-                    callBacks.error(response);
-                });
-        };
-
-        $scope.serverReq_post = function (api, params, callBacks) {
-            $http.post(api, {data: params}, {
-                transFormRequest: angular.identity
-            })
-                .success(function (response) {
-                    callBacks.success(response)
-                })
-                .error(function (response) {
-                });
         };
 
         $scope.createDatabase = function () {

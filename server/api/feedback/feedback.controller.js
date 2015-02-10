@@ -16,7 +16,15 @@ exports.index = function (req, res) {
 
 // Get a single feedback
 exports.show = function (req, res) {
-    Feedback.find({"auto_number": {$regex: req.params.q, $options: "i"}}, function (err, feedback) {
+    var options = {};
+    switch (req.query.resultType) {
+        case "short":
+            options = {auto_number: true, rating: true};
+            break;
+        case "long":
+            options = {_id: false};
+    }
+    Feedback.find({"auto_number": {$regex: req.params.q, $options: "i"}}, options, function (err, feedback) {
         if (err) {
             return handleError(res, err);
         }
