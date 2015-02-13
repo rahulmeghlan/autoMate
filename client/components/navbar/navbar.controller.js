@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularFullstackApp')
-    .controller('NavbarCtrl', function ($scope, $location, Auth) {
+    .controller('NavbarCtrl', function ($scope, $location, Auth, $routeParams) {
         $scope.menu = [
             {
                 'title': 'Home',
@@ -9,7 +9,7 @@ angular.module('angularFullstackApp')
             },
             {
                 'title': 'Feedback',
-                'link': '/feedback'
+                'link': '/feedback/' + $routeParams.id
             }
         ];
 

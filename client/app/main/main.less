@@ -3,28 +3,54 @@
 }
 
 #banner {
-    border-bottom: none;
-    margin-top: -20px;
+  border-bottom: none;
+  margin-top: -20px;
 }
 
 #banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
 }
 
 .hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+  position: relative;
+  padding: 5% 15px;
+  color: #F5F5F5;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  background: #4393B9;
 }
 
 .footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.form-control{
+  padding: 30px 12px;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+.list-group-item {
+  text-align: left;
+  font-size: 26px;
+  text-transform: uppercase;
+  &.label-danger {
+    background-color: @brand-danger;
+  }
+  .rating {
+    float: right;
+    font-size: 16px;
+    margin-top: 12px;
+  }
+  &:hover {
+    background-color: @bg-color;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+  }
 }
