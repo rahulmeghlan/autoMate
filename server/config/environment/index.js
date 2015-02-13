@@ -10,6 +10,8 @@ function requiredProcessEnv(name) {
   return process.env[name];
 }
 
+//process.env.NODE_ENV = "production";    //todo: this only done when making a build, need to find a better way
+
 // All configurations will extend these options
 // ============================================
 var all = {

@@ -9,7 +9,7 @@ angular.module('angularFullstackApp')
             },
             {
                 'title': 'Feedback',
-                'link': '/feedback/' + $routeParams.id
+                'link': '/feedback, /feedback/' + $routeParams.id     //note: the first link will be the default link always
             }
         ];
 
@@ -24,6 +24,15 @@ angular.module('angularFullstackApp')
         };
 
         $scope.isActive = function (route) {
-            return route === $location.path();
+            var tempRoute = route.split(",");
+            var isRoute = false;
+            for (var i = 0; i < tempRoute.length; i++) {
+                if (tempRoute[i].trim() === $location.path()) {
+                    isRoute = true;
+                    break;
+                }
+            }
+            return isRoute;
+//            return route === $location.path();
         };
     });

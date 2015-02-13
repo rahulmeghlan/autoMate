@@ -14,6 +14,7 @@ module.exports = {
             8080,
 
   // MongoDB connection options
+    //note: process.env.MONGOLAB_URI was replaced with MONGOSOUP_URL
   mongo: {
     uri:    process.env.MONGOLAB_URI ||
             process.env.MONGOHQ_URL ||
